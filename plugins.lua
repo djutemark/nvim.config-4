@@ -33,6 +33,12 @@ Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' })
 Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
 
+Plug('mg979/vim-visual-multi', {['branch'] = 'master'})
+Plug('ggandor/leap.nvim')
+Plug('RRethy/vim-illuminate')
+Plug('lewis6991/gitsigns.nvim')
+Plug('folke/trouble.nvim')
+
 -- -- Shorthand notation for GitHub; translates to https://github.com/junegunn/seoul256.vim.git
 -- Plug('junegunn/seoul256.vim')
 --

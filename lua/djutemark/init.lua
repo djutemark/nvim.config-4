@@ -8,6 +8,9 @@ vim.wo.number = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Don't wrap lines
+vim.opt.wrap = false
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
