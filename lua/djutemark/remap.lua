@@ -1,6 +1,5 @@
 -- Handle "project" files
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
--- vim.keymap.set('n', '<leader>pp', require('telescope.builtin').git_files, { })
+vim.keymap.set("n", "<leader>pv", ":Neotree position=current reveal<CR>") -- vim.cmd.Ex
 
 -- Tabbing in insert mode does what's expected
 vim.keymap.set("i", "<S-Tab>", "<C-d>")
@@ -29,4 +28,28 @@ vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").loa
 -- C-s saves!
 vim.keymap.set("n", "<C-s>", [[:w<CR>]])
 vim.keymap.set("n", "<C-S>", [[:wa<CR>]])
+
+-- Restart LSP
+vim.keymap.set("n", "<leader>lspr", ":LspRestart<CR>")
+
+-- Quickfix keymaps
+local function toggle_quickfix()
+  local qf_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    end
+  end
+  if qf_exists == true then
+    vim.cmd "cclose"
+    return
+  end
+  if not vim.tbl_isempty(vim.fn.getqflist()) then
+    vim.cmd "copen"
+  end
+end
+
+vim.keymap.set("n", "<A-l>", ":cnext<CR>")
+vim.keymap.set("n", "<A-h>", ":cprev<CR>")
+vim.keymap.set("n", "<leader>cc", toggle_quickfix)
 
