@@ -28,7 +28,6 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
 -- Other
-vim.opt.shiftwidth = 2
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- Keymaps for better default experience
 
 -- [[ Highlight on yank ]]

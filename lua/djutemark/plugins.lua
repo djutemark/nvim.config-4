@@ -38,6 +38,7 @@ Plug('ggandor/leap.nvim')
 Plug('RRethy/vim-illuminate')
 Plug('lewis6991/gitsigns.nvim')
 Plug('folke/trouble.nvim')
+Plug('numToStr/Comment.nvim')
 
 -- -- Shorthand notation for GitHub; translates to https://github.com/junegunn/seoul256.vim.git
 -- Plug('junegunn/seoul256.vim')
