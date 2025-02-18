@@ -1,3 +1,5 @@
+require("djutemark.plugins")
+require("djutemark.lsp")
 require("djutemark.remap")
 
 -- Set highlight on search

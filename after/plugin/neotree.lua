@@ -13,7 +13,6 @@ require('neo-tree').setup({
       handler = function(arg)
 	-- do something, the value of arg varies by event.
 	vim.opt.relativenumber = true
-	vim.keymap.set({ 'n', 'x' }, 'Q', '<Plug>(leap)')
       end,
       -- id = "optional unique id, only meaningful if you want to unsubscribe later"
     },
@@ -21,8 +20,9 @@ require('neo-tree').setup({
   window = {
     mappings = {
       ["<C-v>"] = "open_vsplit",
+      ["<C-s>"] = "open_split",
       ["s"] = "",
+      ["S"] = "",
     },
   },
 })
-
