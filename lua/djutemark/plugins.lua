@@ -5,14 +5,14 @@ vim.call('plug#begin')
 
 Plug('folke/persistence.nvim')
 
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate'})
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/cmp-cmdline')
 Plug('hrsh7th/nvim-cmp')
-Plug('L3MON4D3/LuaSnip', { ['tag'] = 'v2.*', ['do'] = 'make install_jsregexp'})
+Plug('L3MON4D3/LuaSnip', { ['tag'] = 'v2.*', ['do'] = 'make install_jsregexp' })
 
 Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
@@ -30,10 +30,16 @@ Plug('nvim-neo-tree/neo-tree.nvim', { ['branch'] = 'v3.x' })
 Plug('navarasu/onedark.nvim')
 
 Plug('nvim-lua/plenary.nvim')
-Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' })
+Plug('nvim-telescope/telescope-fzf-native.nvim',
+  { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' })
 Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
 
-Plug('mg979/vim-visual-multi', {['branch'] = 'master'})
+Plug('kevinhwang91/promise-async')
+Plug('kevinhwang91/nvim-ufo')
+
+Plug('mbbill/undotree')
+
+-- Plug('mg979/vim-visual-multi', {['branch'] = 'master'})
 Plug('ggandor/leap.nvim')
 Plug('RRethy/vim-illuminate')
 Plug('lewis6991/gitsigns.nvim')
