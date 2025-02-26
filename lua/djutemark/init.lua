@@ -1,9 +1,9 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 require("djutemark.plugins")
 require("djutemark.lsp")
 require("djutemark.remap")
-
--- Set highlight on search
-vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
@@ -29,6 +29,16 @@ vim.wo.signcolumn = 'yes'
 
 -- Other
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- Keymaps for better default experience
+
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.scrolloff = 4
+vim.opt.sidescrolloff = 16
+
+-- Set highlight on search
+vim.o.hlsearch = false
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
