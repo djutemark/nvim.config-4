@@ -39,7 +39,7 @@ Plug('kevinhwang91/nvim-ufo')
 
 Plug('mbbill/undotree')
 
--- Plug('mg979/vim-visual-multi', {['branch'] = 'master'})
+Plug('mg979/vim-visual-multi', {['branch'] = 'master'})
 Plug('ggandor/leap.nvim')
 Plug('RRethy/vim-illuminate')
 Plug('lewis6991/gitsigns.nvim')
