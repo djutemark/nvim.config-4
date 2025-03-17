@@ -36,7 +36,7 @@ local on_attach = function(client, bufnr)
   end, { buffer = bufnr, remap = false })
 end
 
-local servers = { 'omnisharp', 'svelte', 'ts_ls', 'gopls', 'templ', 'clangd' }
+local servers = { 'omnisharp', 'svelte', 'ts_ls', 'gopls', 'templ', 'clangd', 'zls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
     on_attach = on_attach,
