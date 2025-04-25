@@ -1,6 +1,7 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { 'lua_ls', 'omnisharp', 'svelte', 'ts_ls', 'gopls', 'templ', 'html', 'clangd' },
+  ensure_installed = {
+    'lua_ls', 'omnisharp', 'svelte', 'ts_ls', 'gopls', 'templ', 'html', 'clangd' },
   automatic_installation = true,
 })
 
@@ -36,7 +37,22 @@ local on_attach = function(client, bufnr)
   end, { buffer = bufnr, remap = false })
 end
 
-local servers = { 'omnisharp', 'svelte', 'ts_ls', 'gopls', 'templ', 'clangd', 'zls', 'astro', 'tailwindcss' }
+local servers = {
+  'omnisharp',
+  'svelte',
+  'ts_ls',
+  'gopls',
+  'templ',
+  'clangd',
+  'zls',
+  'astro',
+  'tailwindcss',
+  'rust_analyzer',
+  -- 'denols',
+  'jedi_language_server',
+  'graphql',
+  'cssls',
+}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup({
     on_attach = on_attach,
