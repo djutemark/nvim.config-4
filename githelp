@@ -1,0 +1,5 @@
+-- To clone a project using a specific ssh key
+git clone git@provider.com:userName/projectName.git --config core.sshCommand="ssh -i ~/.ssh/name_rsa"
+
+-- To decide which ssh key to use for the current repository
+git config --add --local core.sshCommand 'ssh -i ~/.ssh/name_rsa'
