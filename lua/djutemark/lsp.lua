@@ -40,7 +40,6 @@ end
 local servers = {
   'omnisharp',
   'svelte',
-  'ts_ls',
   'gopls',
   'templ',
   'clangd',
@@ -48,8 +47,6 @@ local servers = {
   'astro',
   'tailwindcss',
   'rust_analyzer',
-  -- 'denols',
-  'jedi_language_server',
   'graphql',
   'cssls',
 }
@@ -89,3 +86,18 @@ lspconfig['lua_ls'].setup {
     },
   },
 }
+
+lspconfig["denols"].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+}
+
+lspconfig["ts_ls"].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern("package.json"),
+  single_file_support = false
+}
+
+
