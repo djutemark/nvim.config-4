@@ -49,7 +49,11 @@ local function toggle_quickfix()
   end
 end
 
+-- Quickfix navigation
 vim.keymap.set("n", "<A-l>", ":cnext<CR>")
 vim.keymap.set("n", "<A-h>", ":cprev<CR>")
 vim.keymap.set("n", "<leader>cc", toggle_quickfix)
+
+-- Space does nothing
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- Keymaps for better default experience
 

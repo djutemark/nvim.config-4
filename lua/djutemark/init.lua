@@ -27,9 +27,6 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
--- Other
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- Keymaps for better default experience
-
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
