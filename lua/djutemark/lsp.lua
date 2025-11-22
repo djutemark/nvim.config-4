@@ -38,7 +38,6 @@ local on_attach = function(client, bufnr)
 end
 
 local servers = {
-  'omnisharp',
   'svelte',
   'gopls',
   'templ',
@@ -56,6 +55,13 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   })
 end
+
+-- OmniSharp needs explicit cmd because Mason installs it as "OmniSharp" (PascalCase)
+lspconfig.omnisharp.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "OmniSharp" },
+})
 
 lspconfig.html.setup({
   on_attach = on_attach,
@@ -99,5 +105,3 @@ lspconfig["ts_ls"].setup {
   root_dir = lspconfig.util.root_pattern("package.json"),
   single_file_support = false
 }
-
-
