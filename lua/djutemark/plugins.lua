@@ -5,7 +5,10 @@ vim.call('plug#begin')
 
 Plug('folke/persistence.nvim')
 
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('nvim-treesitter/nvim-treesitter', {
+  ['lazy'] = false,
+  ['do'] = ':TSUpdate'
+})
 
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
@@ -32,7 +35,7 @@ Plug('navarasu/onedark.nvim')
 Plug('nvim-lua/plenary.nvim')
 Plug('nvim-telescope/telescope-fzf-native.nvim',
   { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' })
-Plug('nvim-telescope/telescope.nvim', { ['branch'] = '0.1.x' })
+Plug('nvim-telescope/telescope.nvim', { ['branch'] = 'master' })
 
 Plug('kevinhwang91/promise-async')
 Plug('kevinhwang91/nvim-ufo')
@@ -40,7 +43,7 @@ Plug('kevinhwang91/nvim-ufo')
 Plug('mbbill/undotree')
 
 Plug('mg979/vim-visual-multi', {['branch'] = 'master'})
-Plug('ggandor/leap.nvim')
+Plug('https://codeberg.org/andyg/leap.nvim.git')
 Plug('RRethy/vim-illuminate')
 Plug('lewis6991/gitsigns.nvim')
 Plug('folke/trouble.nvim')

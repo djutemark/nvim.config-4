@@ -5,37 +5,40 @@ require("mason-lspconfig").setup({
   automatic_installation = true,
 })
 
-local lspconfig = require('lspconfig')
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local on_attach = function(client, bufnr)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover)
-  vim.keymap.set("n", '<leader>rn', vim.lsp.buf.rename)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-  vim.keymap.set('n', 'gI', vim.lsp.buf.implementation)
-  vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local opts = { buffer = bufnr }
 
-  vim.keymap.set("n", "<leader>ff", function()
-    if vim.bo.filetype == "templ" then
-      local cf_bufnr = vim.api.nvim_get_current_buf()
-      local filename = vim.api.nvim_buf_get_name(cf_bufnr)
-      local cmd = "templ fmt " .. vim.fn.shellescape(filename)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, opts)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 
-      vim.fn.jobstart(cmd, {
-        on_exit = function()
-          -- Reload the buffer only if it's still the current buffer
-          if vim.api.nvim_get_current_buf() == cf_bufnr then
-            vim.cmd('e!')
-          end
-        end,
-      })
-    else
-      vim.lsp.buf.format()
-    end
-  end, { buffer = bufnr, remap = false })
-end
+    vim.keymap.set("n", "<leader>ff", function()
+      if vim.bo.filetype == "templ" then
+        local cf_bufnr = vim.api.nvim_get_current_buf()
+        local filename = vim.api.nvim_buf_get_name(cf_bufnr)
+        local cmd = "templ fmt " .. vim.fn.shellescape(filename)
+
+        vim.fn.jobstart(cmd, {
+          on_exit = function()
+            -- Reload the buffer only if it's still the current buffer
+            if vim.api.nvim_get_current_buf() == cf_bufnr then
+              vim.cmd('e!')
+            end
+          end,
+        })
+      else
+        vim.lsp.buf.format()
+      end
+    end, { buffer = bufnr, remap = false })
+  end,
+})
 
 local servers = {
   'svelte',
@@ -50,28 +53,24 @@ local servers = {
   'cssls',
 }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup({
-    on_attach = on_attach,
+  vim.lsp.enable(lsp, {
     capabilities = capabilities,
   })
 end
 
 -- OmniSharp needs explicit cmd because Mason installs it as "OmniSharp" (PascalCase)
-lspconfig.omnisharp.setup({
-  on_attach = on_attach,
+vim.lsp.enable('omnisharp', {
   capabilities = capabilities,
   cmd = { "OmniSharp" },
 })
 
-lspconfig.html.setup({
-  on_attach = on_attach,
+vim.lsp.enable('html', {
   capabilities = capabilities,
   filetypes = { 'html', 'templ' },
 })
 
-lspconfig['lua_ls'].setup {
+vim.lsp.enable('lua_ls', {
   capabilities = capabilities,
-  on_attach = on_attach,
   settings = {
     Lua = {
       runtime = {
@@ -91,17 +90,19 @@ lspconfig['lua_ls'].setup {
       },
     },
   },
-}
+})
 
-lspconfig["denols"].setup {
-  on_attach = on_attach,
+vim.lsp.enable("denols", {
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-}
+  root_dir = function(bufnr)
+    return vim.fs.root(bufnr, { "deno.json", "deno.jsonc" })
+  end,
+})
 
-lspconfig["ts_ls"].setup {
-  on_attach = on_attach,
+vim.lsp.enable("ts_ls", {
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern("package.json"),
+  root_dir = function(bufnr)
+    return vim.fs.root(bufnr, { "package.json" })
+  end,
   single_file_support = false
-}
+})

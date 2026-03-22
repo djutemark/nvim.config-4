@@ -1,4 +1,17 @@
 local builtin = require('telescope.builtin')
+local telescope = require('telescope')
+
+telescope.setup({
+  defaults = {
+    preview = {
+      treesitter = false,
+    },
+  },
+  extensions = {
+    fzf = {},
+  },
+})
+pcall(telescope.load_extension, 'fzf')
 
 vim.keymap.set("n", "<leader>pp", builtin.git_files, {})
 vim.keymap.set("n", "<leader>pf", builtin.find_files, {})

@@ -1,40 +1,21 @@
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  -- ensure_installed = { "c", "lua", "vim", "go", "javascript", "typescript" },
-  ensure_installed = { "lua", "go" },
+require('nvim-treesitter').setup()
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+-- Install parsers
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'TSUpdate',
+  once = true,
+  callback = function()
+    require('nvim-treesitter.install').ensure_installed({ 'lua', 'go' })
+  end,
+})
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  -- List of parsers to ignore installing (or "all")
-  ignore_install = { "javascript" },
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = {
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<c-backspace>',
-    },
-  },
-}
-
-
-
+-- Incremental selection
+vim.keymap.set('n', '<c-space>', function()
+  require('nvim-treesitter.incremental_selection').init()
+end)
+vim.keymap.set('x', '<c-space>', function()
+  require('nvim-treesitter.incremental_selection').node_incremental()
+end)
+vim.keymap.set('x', '<c-backspace>', function()
+  require('nvim-treesitter.incremental_selection').node_decremental()
+end)
